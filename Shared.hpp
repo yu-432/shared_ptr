@@ -1,8 +1,8 @@
 #ifndef SHARED_HPP
 #define SHARED_HPP
 
-#include <vector>
 #include <iostream>
+#include <vector>
 
 namespace toolbox {
 template <typename T>
@@ -46,17 +46,16 @@ class shared_ptr {
   int use_count() const { return *count_; }
 
   void reset(T* ptr = NULL) {
+    int* new_count = new int(1);
+    if (ptr == NULL) {
+      *new_count = 0;
+    }
     if (--(*count_) == 0) {
       delete ptr_;
       delete count_;
     }
-    if (ptr != NULL) {
-      ptr_ = ptr;
-      count_ = new int(1);
-    } else {
-      ptr_ = NULL;
-      count_ = new int(0);
-    }
+    ptr_ = ptr;
+    count_ = new_count;
   }
 
   T& operator*() const { return *ptr_; }
