@@ -1,4 +1,4 @@
-#include "Shared.hpp"  // toolbox::shared_ptr用
+#include "Shared2.hpp"  // toolbox::shared_ptr用
 #include <memory>      // std::shared_ptr用
 #include <iostream>
 #include <cassert>

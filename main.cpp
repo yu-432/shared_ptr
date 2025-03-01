@@ -3,7 +3,7 @@
 #include <memory>  // std::shared_ptr用
 #include <string>
 
-#include "Shared.hpp"  // toolbox::shared_ptr用
+#include "Shared2.hpp"  // toolbox::shared_ptr用
 
 // テスト用のクラス
 class TestObject {
