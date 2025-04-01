@@ -49,7 +49,10 @@ shared_ptr& operator=(const shared_ptr& other) {
     if (_ptr != NULL && --(*_count) == 0) {
       delete _ptr;
       delete _count;
+      _count = NULL;
     }
+    if (_count && (*_count == 0))
+        delete _count;
   }
 
   T* const get() const { return _ptr; }
