@@ -24,22 +24,21 @@ class shared_ptr {
     }
   }
 
-  shared_ptr& operator=(const shared_ptr& other) {
+shared_ptr& operator=(const shared_ptr& other) {
     if (this != &other) {
-      if (--(*_count) <= 0) {
-        delete _ptr;
-        delete _count;
-      }
-      _ptr = other._ptr;
-      _count = other._count;
-      if (_ptr != NULL) {
-        ++(*_count);
-      } else {
-        _count = new int(0);
-      }
+        if (other._ptr != NULL) {
+            ++(*other._count);
+        }
+        if (_ptr != NULL && --(*_count) <= 0) {
+            delete _ptr;
+            delete _count;
+        }
+        _ptr = other._ptr;
+        _count = other._count;
     }
     return *this;
-  }
+}
+
 
   void swap(shared_ptr& other) {
     std::swap(_ptr, other._ptr);
@@ -47,11 +46,7 @@ class shared_ptr {
   }
 
   ~shared_ptr() {
-    if (*_count == 0) {
-      delete _count;
-      return;
-    }
-    if (--(*_count) == 0) {
+    if (_ptr != NULL && --(*_count) == 0) {
       delete _ptr;
       delete _count;
     }
